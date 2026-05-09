@@ -8,8 +8,8 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 import faiss
-import fitz
 import numpy as np
+import pymupdf4llm
 from sentence_transformers import SentenceTransformer
 
 from rag.config import DATA_DIR, INDEX_DIR, settings
@@ -36,15 +36,29 @@ def _split(text: str, size: int, overlap: int) -> list[str]:
     return out
 
 
+def _is_low_quality(text: str) -> bool:
+    """Skip chunks that are mostly numbers, single chars per line, or empty after cleanup."""
+    stripped = text.strip()
+    if len(stripped) < 50:
+        return True
+    alpha = sum(c.isalpha() for c in stripped)
+    if alpha / max(len(stripped), 1) < 0.4:
+        return True
+    return False
+
+
 def _read_pdf(path: Path) -> list[Chunk]:
+    pages = pymupdf4llm.to_markdown(str(path), page_chunks=True, show_progress=False)
     chunks: list[Chunk] = []
-    with fitz.open(path) as doc:
-        for page_num, page in enumerate(doc, start=1):
-            text = page.get_text("text").strip()
-            if not text:
+    for entry in pages:
+        page_num = entry.get("metadata", {}).get("page", 0) + 1
+        text = (entry.get("text") or "").strip()
+        if not text:
+            continue
+        for piece in _split(text, settings.chunk_size, settings.chunk_overlap):
+            if _is_low_quality(piece):
                 continue
-            for piece in _split(text, settings.chunk_size, settings.chunk_overlap):
-                chunks.append(Chunk(doc_id=path.name, page=page_num, text=piece))
+            chunks.append(Chunk(doc_id=path.name, page=page_num, text=piece))
     return chunks
 
 

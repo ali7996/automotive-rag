@@ -42,7 +42,7 @@ def build_app() -> gr.Blocks:
             f"Ask questions about automotive engineering papers. "
             f"**Backend:** `{active_backend()}`"
         )
-        chat_box = gr.Chatbot(type="messages", height=500)
+        chat_box = gr.Chatbot(height=500)
         msg = gr.Textbox(label="Question", placeholder="e.g. How does end-to-end learning differ from modular pipelines?")
         clear = gr.Button("Clear")
         msg.submit(respond, [msg, chat_box], [chat_box, msg])
