@@ -1,0 +1,7 @@
+[
+  {
+    "question": "Replace this with a real question about one of your papers.",
+    "expected_doc_id": "paper_filename.pdf",
+    "expected_keywords": ["keyword1", "keyword2"]
+  }
+]
