@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import pickle
+import json
 from functools import lru_cache
 
 import faiss
@@ -19,8 +19,8 @@ def _load():
             f"No index found at {INDEX_DIR}. Run `python -m rag.ingest` first."
         )
     index = faiss.read_index(str(INDEX_DIR / "faiss.index"))
-    with open(INDEX_DIR / "chunks.pkl", "rb") as f:
-        chunks = pickle.load(f)
+    with open(INDEX_DIR / "chunks.json", encoding="utf-8") as f:
+        chunks = json.load(f)
     model = SentenceTransformer(settings.embedding_model)
     return index, chunks, model
 

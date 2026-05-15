@@ -15,7 +15,7 @@ Question-answering over automotive engineering papers. Retrieves relevant passag
 
 Built to be **provider-agnostic**: the same code runs against a hosted LLM (Groq, free tier) for the public demo, or against a fully local model (Ollama) for offline use.
 
-> **Live demo:** _coming soon — Hugging Face Space link goes here once deployed_
+> **Live demo:** [**huggingface.co/spaces/Aly323/automotive-rag**](https://huggingface.co/spaces/Aly323/automotive-rag)
 > **Author:** [@ali7996](https://github.com/ali7996)
 
 ---
@@ -57,7 +57,7 @@ Build-time pipeline (`python -m rag.ingest`):
 PDFs (data/*.pdf) → page text (PyMuPDF) → chunks (size 800, overlap 100)
                                           → embeddings (bge-small-en-v1.5)
                                           → FAISS index (cosine via inner product on normalized vectors)
-                                          → data/index/{faiss.index, chunks.pkl, meta.json}
+                                          → data/index/{faiss.index, chunks.json, meta.json}
 ```
 
 ## Tech

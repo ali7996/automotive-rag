@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import pickle
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -85,8 +84,8 @@ def build_index(data_dir: Path = DATA_DIR, index_dir: Path = INDEX_DIR) -> int:
 
     index_dir.mkdir(parents=True, exist_ok=True)
     faiss.write_index(index, str(index_dir / "faiss.index"))
-    with open(index_dir / "chunks.pkl", "wb") as f:
-        pickle.dump([asdict(c) for c in chunks], f)
+    with open(index_dir / "chunks.json", "w", encoding="utf-8") as f:
+        json.dump([asdict(c) for c in chunks], f, ensure_ascii=False)
 
     meta = {
         "num_chunks": len(chunks),
