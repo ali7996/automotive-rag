@@ -147,6 +147,4 @@ automotive-rag/
 └── .env.example
 ```
 
-## License
 
-MIT — see [LICENSE](LICENSE).
