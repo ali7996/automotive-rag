@@ -1,7 +1,47 @@
 [
   {
-    "question": "Replace this with a real question about one of your papers.",
-    "expected_doc_id": "paper_filename.pdf",
-    "expected_keywords": ["keyword1", "keyword2"]
+    "question": "How does NVIDIA's end-to-end system learn to steer a car directly from camera images?",
+    "expected_doc_id": "bojarski_2016_end_to_end_driving.pdf",
+    "expected_keywords": ["convolutional", "steering"]
+  },
+  {
+    "question": "What earlier project does the NVIDIA paper credit as inspiration, and what was it?",
+    "expected_doc_id": "bojarski_2016_end_to_end_driving.pdf",
+    "expected_keywords": ["DAVE", "end-to-end"]
+  },
+  {
+    "question": "How is the NVIDIA model's autonomy or driving performance measured?",
+    "expected_doc_id": "bojarski_2016_end_to_end_driving.pdf",
+    "expected_keywords": ["autonomy", "time"]
+  },
+  {
+    "question": "Why does plain imitation learning struggle at intersections, and how does conditional imitation learning address it?",
+    "expected_doc_id": "codevilla_2018_conditional_imitation_learning.pdf",
+    "expected_keywords": ["command", "intersection"]
+  },
+  {
+    "question": "Why is data augmentation important for generalization in conditional imitation learning?",
+    "expected_doc_id": "codevilla_2018_conditional_imitation_learning.pdf",
+    "expected_keywords": ["augmentation", "generalization"]
+  },
+  {
+    "question": "At an intersection, what does a navigational command tell the conditional imitation learning vehicle to do?",
+    "expected_doc_id": "codevilla_2018_conditional_imitation_learning.pdf",
+    "expected_keywords": ["turn", "intersection"]
+  },
+  {
+    "question": "What is the NoCrash benchmark introduced for evaluating behavior cloning?",
+    "expected_doc_id": "codevilla_2019_behavior_cloning_limits.pdf",
+    "expected_keywords": ["NoCrash", "evaluation"]
+  },
+  {
+    "question": "How does adding a speed prediction branch affect behavior cloning performance?",
+    "expected_doc_id": "codevilla_2019_behavior_cloning_limits.pdf",
+    "expected_keywords": ["speed", "prediction"]
+  },
+  {
+    "question": "What limitation related to training variance does the behavior cloning paper highlight?",
+    "expected_doc_id": "codevilla_2019_behavior_cloning_limits.pdf",
+    "expected_keywords": ["variance", "initialization"]
   }
 ]

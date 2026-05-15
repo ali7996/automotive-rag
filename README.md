@@ -109,7 +109,7 @@ That's the same `app.py`. The provider switch is a single env var.
 
 ## Evaluation
 
-`eval/run_eval.py` runs a small evaluation harness — for each question, it computes:
+`eval/run_eval.py` runs a small evaluation harness over `eval/questions.json` — 9 hand-written questions spanning the three indexed papers. For each question it computes:
 
 - **Retrieval hit-rate@k**: was the expected source document among the top-k retrieved chunks?
 - **Keyword coverage**: did the LLM's answer contain the expected key terms?
@@ -118,9 +118,14 @@ That's the same `app.py`. The provider switch is a single env var.
 python -m eval.run_eval
 ```
 
-Edit `eval/questions.json` with real question/answer pairs from your own papers.
+Results (9 questions, top-k = 4, Groq `llama-3.1-8b-instant`):
 
-_Results table will be populated here once a real corpus is indexed._
+| Metric | Score |
+|---|---|
+| Retrieval hit-rate@4 | **9 / 9 — 100%** |
+| Mean keyword coverage | **100%** |
+
+Every question retrieved its source document, and every answer carried the expected terms plus an inline `[doc:page]` citation. Honest framing: this is a smoke-test-scale eval — 3 papers, 205 chunks — so a high hit-rate is expected rather than impressive, and keyword coverage is a deliberately crude lexical proxy that checks answers are on-topic and grounded, not that they are exhaustively correct. Drop more PDFs into `data/` and extend `questions.json` to stress-test retrieval at a scale where hit-rate becomes discriminating.
 
 ## Project layout
 
